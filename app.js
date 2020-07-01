@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
 const connectDB = require('./config/db');
+const auth = require('./routes/auth');
 
 // Load configuration
 dotenv.config({ path: './config/config.env' });
@@ -43,7 +44,9 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/', require('./routes'));
+app.use('/', require('./routes/index'));
+
+app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;
 
