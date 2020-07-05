@@ -1,12 +1,13 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/db');
-const auth = require('./routes/auth');
 
 // Load configuration
 dotenv.config({ path: './config/config.env' });
@@ -17,6 +18,10 @@ require('./config/passport')(passport);
 connectDB();
 
 const app = express();
+
+// Body parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Logging when in development mode
 if (process.env.NODE_ENV === 'development') {
@@ -43,6 +48,9 @@ app.use(
     secret: 'screenplay geek',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+    }),
   })
 );
 
