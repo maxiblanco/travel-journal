@@ -1,5 +1,5 @@
 {
-  "name": "storybook-app",
+  "name": "travel-journal",
   "version": "1.0.0",
   "description": "Secure App to create private and public stories",
   "main": "App.js",
@@ -9,7 +9,9 @@
   },
   "keywords": [
     "stories",
-    "storybook"
+    "journal",
+    "travel",
+    "traveling"
   ],
   "author": "Maximiliano Blanco",
   "license": "MIT",
